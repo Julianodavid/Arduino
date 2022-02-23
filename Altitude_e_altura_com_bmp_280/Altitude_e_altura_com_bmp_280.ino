@@ -10,6 +10,7 @@
 float Altura ;
 float Altitude ;
 float Resultado ; 
+float Resultado2 ; 
  
 
 
@@ -39,7 +40,8 @@ void setup() {
 
   float Altura =  0 ;
   float Altitude = bmp.readAltitude(1013.25);
-  Resultado =  Altura + Altitude ; 
+  Resultado  =  Altura + Altitude ; 
+  Resultado2 =  Altura + Altitude * 3.28084 ;
  
   }
 
@@ -72,6 +74,10 @@ void loop() {
    
     Serial.print("Altura em Metros"); 
     Serial.println(Resultado);
+
+    Serial.print("Altura em Foot"); 
+    Serial.println(Resultado2);
+
 
     Serial.println();
     delay(2000);
