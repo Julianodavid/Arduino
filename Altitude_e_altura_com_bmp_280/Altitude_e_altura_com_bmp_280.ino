@@ -10,10 +10,8 @@
 float Altura ;
 float Altitude ;
 float Resultado ; 
-float Resultado2 ; 
+float Resultado2 ;
  
-
-
 Adafruit_BMP280 bmp; // I2C
 //Adafruit_BMP280 bmp(BMP_CS); // hardware SPI
 //Adafruit_BMP280 bmp(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
@@ -26,8 +24,9 @@ void setup() {
   //status = bmp.begin(BMP280_ADDRESS_ALT, BMP280_CHIPID);
   status = bmp.begin();
   if (!status) {
-    Serial.println(F("Could not find a valid BMP280 sensor, check wiring or "
-                      "try a different address!"));
+    Serial.println(F("Não foi possível encontrar um sensor BMP280 válido," 
+                      "verifique a fiação ou tente um endereço diferente!"));
+                      
     Serial.print("SensorID was: 0x"); Serial.println(bmp.sensorID(),16);
     Serial.print("        ID of 0xFF probably means a bad address, a BMP 180 or BMP 085\n");
     Serial.print("   ID of 0x56-0x58 represents a BMP 280,\n");
@@ -36,14 +35,6 @@ void setup() {
     while (1) delay(10);
 }
 
-{
-
-  float Altura =  0 ;
-  float Altitude = bmp.readAltitude(1013.25);
-  Resultado  =  Altura + Altitude ; 
-  Resultado2 =  Altura + Altitude * 3.28084 ;
- 
-  }
 
   /* Default settings from datasheet. */
   bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,     /* Operating Mode. */
@@ -52,8 +43,16 @@ void setup() {
                   Adafruit_BMP280::FILTER_X16,      /* Filtering. */
                   Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
 
-}
 
+
+
+
+  float Altura =  0 ;
+  float Altitude = bmp.readAltitude(1013.25);
+  Resultado  =  Altitude /1000 + 1 ; 
+  Resultado2 =  Resultado * 3.28084 ;
+ 
+  }
 
 
 void loop() {
