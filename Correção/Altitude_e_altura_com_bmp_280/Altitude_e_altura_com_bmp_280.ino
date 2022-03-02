@@ -4,10 +4,11 @@
 Adafruit_BMP280 bmp; //OBJETO DO TIPO Adafruit_BMP280 (I2C)
 
 
-float Altura ;
-float Altitude ;
-float Resultado ; 
-float Resultado2 ;
+int AltitudeIni ;
+int AltitudeAut ;
+int Resultado ; 
+int Resultado2 ;
+int Cont = 0 ;
 
 
 void setup(){
@@ -15,17 +16,40 @@ void setup(){
   if(!bmp.begin(0x76)){ //SE O SENSOR NÃO FOR INICIALIZADO NO ENDEREÇO I2C 0x76, FAZ
     Serial.println(F("Sensor BMP280 não foi identificado! Verifique as conexões.")); //IMPRIME O TEXTO NO MONITOR SERIAL
     while(1); //SEMPRE ENTRE NO LOOP
+
+    Serial.println ("JDF AUTOMAÇÃO" 
+                    "email jdfautomação@gmail.com" 
+                    " Tel. (0359 88565109");
+    Serial.println("-----------------------------------"); //IMPRIME UMA LINHA NO MONITOR SERIAL
+     delay(500); //INTERVALO DE 2 SEGUNDOS
+
   }
 
-  float Altura =  0 ;
-  float Altitude = bmp.readAltitude(1013.25);
-  Resultado  =  Altitude /1000 + 1 ; 
-  Resultado2 =  Resultado * 3.28084 ;
+
+AltitudeIni =  bmp.readAltitude(1013.25);
+
 
   
 }
 
 void loop(){
+
+
+AltitudeAut = bmp.readAltitude(1013.25);
+
+if  (AltitudeAut > AltitudeIni) { 
+Cont++;
+AltitudeIni = AltitudeAut; 
+}
+
+else if (AltitudeAut < AltitudeIni) { 
+Cont--;
+AltitudeIni = AltitudeAut; 
+}
+
+Resultado2 = (Cont * 1000) * 3.28084; 
+
+
     Serial.print(F("Temperatura: ")); //IMPRIME O TEXTO NO MONITOR SERIAL
     Serial.print(bmp.readTemperature()); //IMPRIME NO MONITOR SERIAL A TEMPERATURA
     Serial.println(" *C (Grau Celsius)"); //IMPRIME O TEXTO NO MONITOR SERIAL
@@ -52,9 +76,9 @@ void loop(){
     Serial.println(" m");
    
     Serial.print("Altura em Metros"); 
-    Serial.println(Resultado);
+    Serial.println(Cont);
 
-    Serial.print("Altura em Foot"); 
+    Serial.print("Altura em Pés"); 
     Serial.println(Resultado2);
     
     Serial.println("-----------------------------------"); //IMPRIME UMA LINHA NO MONITOR SERIAL
