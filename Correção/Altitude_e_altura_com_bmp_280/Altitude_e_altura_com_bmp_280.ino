@@ -75,10 +75,10 @@ Resultado2 = (Cont * 1000) * 3.28084;
     Serial.print(bmp.readAltitude(1013.25)); /* Adjusted to local forecast! */
     Serial.println(" m");
    
-    Serial.print("Altura em Metros"); 
+    Serial.print("Altura em Metros = "); 
     Serial.println(Cont);
 
-    Serial.print("Altura em Pés"); 
+    Serial.print("Altura em Pés = "); 
     Serial.println(Resultado2);
     
     Serial.println("-----------------------------------"); //IMPRIME UMA LINHA NO MONITOR SERIAL
