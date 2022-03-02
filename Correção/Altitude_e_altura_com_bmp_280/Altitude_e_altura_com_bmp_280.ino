@@ -16,22 +16,22 @@ void setup(){
   if(!bmp.begin(0x76)){ //SE O SENSOR NÃO FOR INICIALIZADO NO ENDEREÇO I2C 0x76, FAZ
     Serial.println(F("Sensor BMP280 não foi identificado! Verifique as conexões.")); //IMPRIME O TEXTO NO MONITOR SERIAL
     while(1); //SEMPRE ENTRE NO LOOP
+    
 
-    Serial.println ("JDF AUTOMAÇÃO" 
-                    "email jdfautomação@gmail.com" 
-                    " Tel. (0359 88565109");
-    Serial.println("-----------------------------------"); //IMPRIME UMA LINHA NO MONITOR SERIAL
-     delay(500); //INTERVALO DE 2 SEGUNDOS
-
-  }
-
-
-AltitudeIni =  bmp.readAltitude(1013.25);
-
-
-  
 }
 
+AltitudeIni =  bmp.readAltitude(1013.25);
+ 
+{
+    
+    Serial.println ("JDF AUTOMAÇÃO, email jdfautomação@gmail.com Tel. (0359 88565109 :)");
+    Serial.println ("Iniciando Sistema"); 
+    Serial.println("------------------------------------------------------------"); //IMPRIME UMA LINHA NO MONITOR SERIAL
+     
+     delay(7000); //INTERVALO DE 2 SEGUNDOS
+}
+
+}
 void loop(){
 
 
@@ -44,11 +44,11 @@ AltitudeIni = AltitudeAut;
 
 else if (AltitudeAut < AltitudeIni) { 
 Cont--;
+
 AltitudeIni = AltitudeAut; 
+
 }
-
 Resultado2 = (Cont * 1000) * 3.28084; 
-
 
     Serial.print(F("Temperatura: ")); //IMPRIME O TEXTO NO MONITOR SERIAL
     Serial.print(bmp.readTemperature()); //IMPRIME NO MONITOR SERIAL A TEMPERATURA
