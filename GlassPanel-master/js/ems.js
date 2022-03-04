@@ -7,7 +7,7 @@
 		var engine = this;
 		var settings = $.extend({
 			size : 200,
-			RPM : 0,
+			RPM :0,
 			EGT1 : 0,
 			EGT2 : 0,
 			EGT3: 0,
